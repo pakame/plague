@@ -1,0 +1,38 @@
+.fow {
+    display: flex;
+}
+
+.fol-1 {
+    flex: 0 0 auto;
+}
+.fol-1 {
+    flex: 1 1 auto;
+}
+
+#grid {
+    border: 1px solid #272727;
+}
+
+#graph:after {
+    content:"";
+    display: table;
+    clear: both;
+}
+
+#graph div {
+    float: left;
+    height: 100px;
+}
+
+#healthy {
+    background-color: #EFF1F3;
+}
+#immune {
+    background-color: #009FB7;
+}
+#sick {
+    background-color: #A93F55;
+}
+#dead {
+    background-color: #272727;
+}
