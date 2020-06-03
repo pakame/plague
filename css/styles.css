@@ -1,3 +1,6 @@
+html {
+font-size: 12px;
+}
 .fow {
     display: flex;
 }
@@ -5,16 +8,17 @@
 .fol-1 {
     flex: 0 0 auto;
 }
+
 .fol-1 {
     flex: 1 1 auto;
 }
 
 #grid {
-    border: 1px solid #272727;
+    border: 1px solid #dfdfdf;
 }
 
 #graph:after {
-    content:"";
+    content: "";
     display: table;
     clear: both;
 }
@@ -25,14 +29,25 @@
 }
 
 #healthy {
-    background-color: #EFF1F3;
+    background-color: #f6f8fa;
 }
+
 #immune {
     background-color: #009FB7;
 }
+
 #sick {
     background-color: #A93F55;
 }
+
 #dead {
     background-color: #272727;
+}
+
+
+.card-body {
+    border-bottom: 1px solid #eee;
+}
+.card-body:last-child{
+    border-bottom: none;
 }

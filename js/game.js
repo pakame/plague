@@ -1,5 +1,5 @@
 import {Game} from "./grid.js";
-import {id, add_delegate_event} from "./dom.js";
+import {id, query, query_all, add_delegate_event} from "./dom.js";
 
 const sim_1 = {
   size: 384,
@@ -54,12 +54,12 @@ class Main {
 
   init() {
     this.game = new Game(id('grid'), {
-      size: parseInt(id('size').value),
-      p_0: parseFloat(id('propagation').value),
-      d_0: parseFloat(id('death-rate').value),
-      sick_start: parseInt(id('sick-start').value),
-      immune_time: parseInt(id('immune-time').value),
-      sick_time: parseInt(id('sick-time').value),
+      size: parseInt(query('input[name=size]').value),
+      p_0: parseFloat(query('input[name=propagation]').value),
+      d_0: parseFloat(query('input[name=death-rate]').value),
+      sick_start: parseInt(query('input[name=sick-start]').value),
+      immune_time: parseInt(query('input[name=immune-time]').value),
+      sick_time: parseInt(query('input[name=sick-time]').value),
     });
 
     this.game.init();
@@ -116,12 +116,14 @@ id('relaunch').addEventListener('click', (ev) => {
 add_delegate_event(id('main'), 'change, keyup, mousedown, mouseup, mousemove, click', 'input', (ev) => {
   const target = (/** @type {HTMLInputElement}*/ev.target);
 
-  switch (target.id) {
-    //case 'size': main.game.size = target.value; break;
+  switch (target.name) {
     case 'propagation': main.game.p_0 = target.value; break;
     case 'death-rate': main.game.d_0 = target.value; break;
-    case 'sick-start': main.game.sick_start = target.value; break;
     case 'sick-time': main.game.sick_time = target.value; break;
     case 'immune-time': main.game.immune_time = target.value; break;
+  }
+
+  for (let elem of query_all('input[name=' + target.name + ']')) {
+    elem.value = target.value;
   }
 });

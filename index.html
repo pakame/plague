@@ -7,64 +7,101 @@
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body id="main" class="row">
-<div class="col">
-  <canvas id="grid"></canvas>
-</div>
-<div class="col-auto">
-  <div class="form-group form-row">
-    <label for="size" class="col-sm-6 col-form-label">Size</label>
-    <div class="col-sm-6">
-      <input type="range" class="form-control-range custom-range" id="size" min="128" max="1024" value="768" step="64">
+<body id="main" class="container-fluid p-3">
+<div class="row">
+  <div class="col">
+    <canvas id="grid"></canvas>
+  </div>
+  <div class="col-auto">
+    <div class="card">
+      <div class="card-body">
+        <div class="form-inline form-row mb-1">
+          <label for="size" class="col-form-label col-3">Size</label>
+          <div class="col-6">
+            <input type="range" class="form-control-range custom-range" id="size" name="size" min="128" max="1024"
+                   value="768"
+                   step="64">
+          </div>
+          <div class="col-3">
+            <input type="number" class="form-control custom-control w-100" name="size" min="128" max="1024" value="768"
+                   step="64">
+          </div>
+        </div>
+        <div class="form-inline form-row mb-1">
+          <label for="sick-start" class="col-form-label col-3">Sick start</label>
+          <div class="col-6">
+            <input type="range" class="form-control-range custom-range" id="sick-start" name="sick-start"
+                   name="sick-start" min="1"
+                   value="1">
+          </div>
+          <div class="col-3">
+            <input type="number" class="form-control custom-control w-100" name="sick-start" min="1" value="1"
+                   max="65536">
+          </div>
+        </div>
+        <div class="mt-4 text-right">
+          <button class="btn btn-outline-primary" id="relaunch">Relancer</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="form-inline form-row mb-1">
+          <label for="propagation" class="col-form-label col-3">Spread</label>
+          <div class="col-6">
+            <input type="range" class="form-control-range custom-range" id="propagation" name="propagation" min="0.01"
+                   max="1" value="0.1"
+                   step="0.01">
+          </div>
+          <div class="col-3">
+            <input type="number" class="form-control custom-control w-100" name="propagation" min="0.01" max="1"
+                   value="0.1"
+                   step="0.01">
+          </div>
+        </div>
+        <div class="form-inline form-row mb-1">
+          <label for="death-rate" class="col-form-label col-3">Death-rate</label>
+          <div class="col-6">
+            <input type="range" class="form-control-range custom-range" id="death-rate" name="death-rate" min="0.001"
+                   max="1"
+                   value="0.006" step="0.001">
+          </div>
+          <div class="col-3">
+            <input type="number" class="form-control custom-control w-100" name="death-rate" min="0.001" max="1"
+                   value="0.006" step="0.001">
+          </div>
+        </div>
+        <div class="form-inline form-row mb-1">
+          <label for="immune-time" class="col-form-label col-3">Immune time</label>
+          <div class="col-6">
+            <input type="range" class="form-control-range custom-range" id="immune-time" name="immune-time" min="1"
+                   value="5">
+          </div>
+          <div class="col-3">
+            <input type="number" class="form-control custom-control w-100" name="immune-time" min="1" value="5">
+          </div>
+        </div>
+        <div class="form-inline form-row">
+          <label for="sick-time" class="col-form-label col-3">Sick time</label>
+          <div class="col-6">
+            <input type="range" class="form-control-range custom-range" id="sick-time" name="sick-time" min="1"
+                   value="3">
+          </div>
+          <div class="col-3">
+            <input type="number" class="form-control custom-control w-100" name="sick-time" min="1" value="3">
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Statistiques : </p>
+        <div id="graph">
+          <div id="dead"></div>
+          <div id="sick"></div>
+          <div id="immune"></div>
+          <div id="healthy"></div>
+        </div>
+        <pre id="log"></pre>
+      </div>
     </div>
   </div>
-  <div class="form-group form-row">
-    <label for="propagation" class="col-sm-6 col-form-label">Propagation</label>
-    <div class="col-sm-6">
-      <input type="range" class="form-control-range custom-range" id="propagation" min="0.01" max="1" value="0.1" step="0.01">
-    </div>
-  </div>
-  <div class="form-group form-row">
-    <label for="death-rate" class="col-sm-6 col-form-label">Mortalité</label>
-    <div class="col-sm-6">
-      <input type="range" class="form-control-range custom-range" id="death-rate" min="0.001" max="1" value="0.006" step="0.001">
-    </div>
-  </div>
-  <div class="form-group form-row">
-    <label for="sick-start" class="col-sm-6 col-form-label">Malades au depart</label>
-    <div class="col-sm-6">
-      <input type="range" class="form-control-range custom-range" id="sick-start" min="1" value="1">
-    </div>
-  </div>
-  <div class="form-group form-row">
-    <label for="immune-time" class="col-sm-6 col-form-label">Immunité temps</label>
-    <div class="col-sm-6">
-      <input type="range" class="form-control-range custom-range" id="immune-time" min="1" value="5">
-    </div>
-  </div>
-  <div class="form-group form-row">
-    <label for="sick-time" class="col-sm-6 col-form-label">Malade temps</label>
-    <div class="col-sm-6">
-      <input type="range" class="form-control-range custom-range" id="sick-time" min="1" value="3">
-    </div>
-  </div>
-  <div class="form-group form-row">
-    <label for="sick-time" class="col-sm-6 col-form-label">Malade temps</label>
-    <div class="col-sm-6">
-      <input type="date">
-    </div>
-  </div>
-  <div class="form-group">
-    <button class="btn btn-outline-primary" id="relaunch">Relancer</button>
-  </div>
-  <p>Statistiques : </p>
-  <div id="graph">
-    <div id="dead"></div>
-    <div id="sick"></div>
-    <div id="immune"></div>
-    <div id="healthy"></div>
-  </div>
-  <pre id="log"></pre>
 </div>
 <script type="module" src="js/game.js"></script>
 </body>
